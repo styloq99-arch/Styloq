@@ -125,6 +125,37 @@ Tinder Bot
                 </div>
             </div>
         </section>
-
+        
+        <!-- Register for early access Section -->
+        <section id="notification" class="notification">
+            <div class="container">
+                <div class="notification-box scroll-element">
+                    <h2 style="margin-bottom: 1rem; font-size: 2.5rem; text-align: center;">
+                        Be the <span class="neon-text">First</span> to Know
+                    </h2>
+                    <p style="font-size: 1.2rem; text-align: center; color: var(--text-secondary);">
+                        We're launching soon! Get notified when StyloQ goes live and receive exclusive early access.
+                    </p>
+                    
+                    <div class="notification-form">
+                        <select class="form-select" id="userType">
+                            <option value="barber">I'm a Barber/Stylist</option>
+                            <option value="client">I'm a Client</option>
+                            <option value="salon">I'm a Salon Owner</option>
+                        </select>
+                        <input type="email" class="form-input" id="emailInput" placeholder="Enter your email address">
+                        <button class="btn btn-primary" onclick="subscribe()">
+                            <i class="fas fa-bell"></i>
+                            Notify Me on Launch
+                        </button>
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        🎉 Awesome! We'll notify you when we launch. Check your email for confirmation.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
