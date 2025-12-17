@@ -1,0 +1,161 @@
+Tinder Bot
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyloQ - The Future of Barbering</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background">
+        <div class="bg-grid"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+        <div class="bg-element"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" onclick="showPage('home')">StyloQ</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('about')">About</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('services')">Services</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="animate-on-load">Barbering <span class="neon-text">Revolution</span> Starts Here</h1>
+                    <p class="animate-on-load delay-1">Connect barbers, clients, and salons in one powerful platform. Your career, your clients, your rules.</p>
+                    <div class="cta-buttons animate-on-load delay-2">
+                        <a href="#notification" class="btn btn-primary" onclick="showPage('home')">
+                            <i class="fas fa-rocket"></i>
+                            Join the Movement
+                        </a>
+                        <a href="#features" class="btn btn-secondary" onclick="showPage('home')">
+                            <i class="fas fa-play-circle"></i>
+                            See How It Works
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title scroll-element">Why StyloQ <span class="neon-text">Changes Everything</span></h2>
+                <div class="features-grid">
+                    <div class="feature-card scroll-element delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-id-badge"></i>
+                        </div>
+                        <h3>Portable Identity</h3>
+                        <p>Your profile, reviews, and client history move with you. Never start over when you change locations.</p>
+                    </div>
+                    <div class="feature-card scroll-element delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-search-location"></i>
+                        </div>
+                        <h3>Smart Discovery</h3>
+                        <p>Clients find you by style, specialty, or expertise. Showcase what makes you unique.</p>
+                    </div>
+                    <div class="feature-card scroll-element delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Seamless Booking</h3>
+                        <p>Manage your schedule, accept appointments, and reduce no-shows with smart reminders.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Types Section -->
+        <section id="user-types" class="user-types">
+            <div class="container">
+                <h2 class="section-title scroll-element">Built for <span class="neon-text">Everyone</span></h2>
+                <div class="user-grid">
+                    <div class="user-card scroll-element delay-1">
+                        <div class="user-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h3>For Barbers & Stylists</h3>
+                        <p>Take control of your career. Build your brand and keep your clients wherever you work.</p>
+                        <a href="#notification" class="btn btn-primary" style="margin-top: 1.5rem;">
+                            Start Your Journey
+                        </a>
+                    </div>
+                    <div class="user-card scroll-element delay-2">
+                        <div class="user-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3>For Clients</h3>
+                        <p>Never lose your favorite barber. Find the perfect match based on your style preferences.</p>
+                        <a href="#notification" class="btn btn-secondary" style="margin-top: 1.5rem;">
+                            Find Your Barber
+                        </a>
+                    </div>
+                    <div class="user-card scroll-element delay-3">
+                        <div class="user-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>For Salon Owners</h3>
+                        <p>Discover verified talent and build your dream team with our professional network.</p>
+                        <a href="#notification" class="btn btn-primary" style="margin-top: 1.5rem;">
+                            Hire Talent
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Register for early access Section -->
+        <section id="notification" class="notification">
+            <div class="container">
+                <div class="notification-box scroll-element">
+                    <h2 style="margin-bottom: 1rem; font-size: 2.5rem; text-align: center;">
+                        Be the <span class="neon-text">First</span> to Know
+                    </h2>
+                    <p style="font-size: 1.2rem; text-align: center; color: var(--text-secondary);">
+                        We're launching soon! Get notified when StyloQ goes live and receive exclusive early access.
+                    </p>
+                    
+                    <div class="notification-form">
+                        <select class="form-select" id="userType">
+                            <option value="barber">I'm a Barber/Stylist</option>
+                            <option value="client">I'm a Client</option>
+                            <option value="salon">I'm a Salon Owner</option>
+                        </select>
+                        <input type="email" class="form-input" id="emailInput" placeholder="Enter your email address">
+                        <button class="btn btn-primary" onclick="subscribe()">
+                            <i class="fas fa-bell"></i>
+                            Notify Me on Launch
+                        </button>
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        🎉 Awesome! We'll notify you when we launch. Check your email for confirmation.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
