@@ -1,0 +1,34 @@
+/* ORANGE THEME WITH REFINED GLOW */
+:root {
+  --dark-bg: #0f0f0f;
+  --dark-card: rgba(26, 26, 26, 0.8);
+  --dark-surface: rgba(42, 42, 42, 0.9);
+  --dark-border: rgba(255, 140, 0, 0.3);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #aaaaaa;
+  
+  --orange-primary: #ff7700;
+  --orange-secondary: #ff5500;
+  --orange-light: #ff9933;
+  --orange-glow: 0 0 15px rgba(255, 119, 0, 0.6),
+               0 0 30px rgba(255, 119, 0, 0.4);
+  
+  --success: #ff7700;
+  --gradient: linear-gradient(135deg, var(--orange-primary), var(--orange-secondary));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--dark-bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+}
