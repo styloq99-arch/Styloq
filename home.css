@@ -83,3 +83,48 @@
 .feature-card:hover .feature-icon {
     color: var(--orange-primary);
 }
+
+/* User Types Section */
+.user-types {
+    padding: 120px 0;
+    position: relative;
+}
+
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.user-card {
+    background: var(--dark-surface);
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid var(--dark-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.user-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange-primary);
+    box-shadow: var(--orange-glow);
+}
+
+.user-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    color: var(--text-secondary);
+    border: 2px solid var(--dark-border);
+    transition: all 0.3s ease;
+}
+
+.user-card:hover .user-icon {
+    color: var(--orange-primary);
+    border-color: var(--orange-primary);
+}
