@@ -1,0 +1,214 @@
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.hero h1 .neon-text {
+    color: var(--orange-primary);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-secondary);
+}
+
+/* Features Section */
+.features {
+    padding: 120px 0;
+    position: relative;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+}
+
+.section-title .neon-text {
+    color: var(--orange-primary);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+.feature-card {
+    background: var(--dark-surface);
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid var(--dark-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange-primary);
+    box-shadow: var(--orange-glow);
+}
+
+.feature-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    color: var(--orange-primary);
+}
+
+/* User Types Section */
+.user-types {
+    padding: 120px 0;
+    position: relative;
+}
+
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.user-card {
+    background: var(--dark-surface);
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid var(--dark-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.user-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange-primary);
+    box-shadow: var(--orange-glow);
+}
+
+.user-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 50%;
+    display: inline-block;
+    color: var(--text-secondary);
+    border: 2px solid var(--dark-border);
+    transition: all 0.3s ease;
+}
+
+.user-card:hover .user-icon {
+    color: var(--orange-primary);
+    border-color: var(--orange-primary);
+}
+
+/* Notification Section */
+.notification {
+    padding: 120px 0;
+    position: relative;
+}
+
+.notification-box {
+    background: var(--dark-surface);
+    border-radius: 20px;
+    padding: 4rem 3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+}
+
+.notification-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.form-input, .form-select {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.form-input:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--orange-primary);
+    box-shadow: 0 0 10px rgba(255, 119, 0, 0.2);
+}
+
+.success-message {
+    display: none;
+    background: var(--orange-primary);
+    color: var(--dark-bg);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 119, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .notification-form {
+        flex-direction: column;
+    }
+    
+    .form-input, .form-select {
+        min-width: 100%;
+    }
+    
+    .features-grid, .user-grid {
+        grid-template-columns: 1fr;
+    }
+}
