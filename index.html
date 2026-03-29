@@ -52,6 +52,619 @@
         position: relative;
       }
 
+      /* Custom Cursor */
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--orange-primary);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+        box-shadow: 0 0 10px rgba(255, 119, 0, 0.8);
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+        display: none;
+      }
+
+      .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(255, 119, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9998;
+        pointer-events: none;
+        transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+        display: none;
+      }
+
+      @media (pointer: fine) {
+        body, a, button, .btn, .feature-card, .user-card, .team-card, .service-card, .logo, .social-icons a, select, input, textarea {
+          cursor: none;
+        }
+        .cursor-dot, .cursor-outline {
+          display: block;
+        }
+      }
+
+      .cursor-hover .cursor-outline {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(255, 119, 0, 0.1);
+        border-color: var(--orange-primary);
+        backdrop-filter: blur(2px);
+      }
+      
+      .cursor-hover .cursor-dot {
+        width: 12px;
+        height: 12px;
+      }
+
+      /* Button Ripple Effect */
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        background-color: rgba(255, 255, 255, 0.3);
+        pointer-events: none;
+      }
+
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      /* ===== ENHANCED INTERACTIVE STYLES ===== */
+
+      /* Animated gradient border on cards */
+      .feature-card::before,
+      .user-card::before,
+      .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 15px;
+        padding: 1px;
+        background: linear-gradient(135deg, transparent 40%, var(--orange-primary) 50%, transparent 60%);
+        background-size: 300% 300%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        animation: gradientShift 3s ease infinite;
+      }
+
+      .feature-card:hover::before,
+      .user-card:hover::before,
+      .service-card:hover::before {
+        opacity: 1;
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      /* Icon bounce on card hover */
+      .feature-card:hover .feature-icon,
+      .user-card:hover .user-icon {
+        animation: iconBounce 0.6s ease;
+      }
+
+      @keyframes iconBounce {
+        0%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-12px); }
+        50% { transform: translateY(-4px); }
+        70% { transform: translateY(-8px); }
+      }
+
+      /* Neon text interactive glow on hover */
+      .neon-text {
+        transition: text-shadow 0.3s ease, color 0.3s ease;
+      }
+      .neon-text:hover {
+        text-shadow: 0 0 8px rgba(255, 119, 0, 0.6), 0 0 20px rgba(255, 119, 0, 0.4), 0 0 40px rgba(255, 119, 0, 0.2);
+      }
+
+      /* Hero typing cursor */
+      .typing-cursor {
+        display: inline-block;
+        width: 3px;
+        height: 1em;
+        background: var(--orange-primary);
+        margin-left: 4px;
+        animation: blink 0.8s step-end infinite;
+        vertical-align: text-bottom;
+      }
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+
+      /* ===== STATS COUNTER SECTION ===== */
+      .stats-section {
+        padding: 80px 0;
+        position: relative;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+      }
+      .stat-card {
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+        background: var(--dark-surface);
+        border-radius: 15px;
+        border: 1px solid var(--dark-border);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--orange-primary);
+        box-shadow: var(--orange-glow);
+      }
+      .stat-number {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--orange-primary);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .stat-label {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .stat-icon {
+        font-size: 2rem;
+        color: rgba(255, 119, 0, 0.15);
+        position: absolute;
+        top: 15px;
+        right: 15px;
+      }
+
+      /* ===== HOW IT WORKS TIMELINE ===== */
+      .timeline-section {
+        padding: 100px 0;
+        position: relative;
+      }
+      .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        padding-left: 60px;
+      }
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 24px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, transparent, var(--orange-primary), transparent);
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: var(--dark-surface);
+        border-radius: 15px;
+        border: 1px solid var(--dark-border);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+      }
+      .timeline-item:hover {
+        border-color: var(--orange-primary);
+        transform: translateX(10px);
+        box-shadow: var(--orange-glow);
+      }
+      .timeline-item::before {
+        content: attr(data-step);
+        position: absolute;
+        left: -48px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        background: var(--dark-bg);
+        border: 2px solid var(--orange-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.9rem;
+        color: var(--orange-primary);
+        transition: all 0.3s ease;
+        z-index: 2;
+      }
+      .timeline-item:hover::before {
+        background: var(--orange-primary);
+        color: var(--dark-bg);
+        box-shadow: 0 0 15px rgba(255, 119, 0, 0.6);
+      }
+      .timeline-item h3 {
+        margin-bottom: 0.5rem;
+      }
+      .timeline-item p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+      .timeline-item .timeline-icon {
+        float: right;
+        font-size: 2rem;
+        color: rgba(255, 119, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+      .timeline-item:hover .timeline-icon {
+        color: var(--orange-primary);
+        transform: scale(1.2);
+      }
+
+      /* ===== ENHANCED FOOTER ===== */
+      .footer-wave {
+        position: relative;
+        overflow: hidden;
+        height: 80px;
+      }
+      .footer-wave svg {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 80px;
+      }
+
+      footer {
+        background: linear-gradient(180deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%);
+        color: var(--text-primary);
+        padding: 0 0 0 0;
+        border-top: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--orange-primary), transparent);
+        animation: footerGlow 3s ease-in-out infinite;
+      }
+
+      @keyframes footerGlow {
+        0%, 100% { width: 200px; opacity: 0.6; }
+        50% { width: 600px; opacity: 1; }
+      }
+
+      .footer-inner {
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-brand h3 {
+        font-size: 2rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--text-primary), var(--orange-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .footer-brand p {
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .footer-col h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+      .footer-col h4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30px;
+        height: 2px;
+        background: var(--orange-primary);
+        transition: width 0.3s ease;
+      }
+      .footer-col:hover h4::after {
+        width: 50px;
+      }
+
+      .footer-links-new {
+        list-style: none;
+        padding: 0;
+      }
+      .footer-links-new li {
+        margin-bottom: 0.8rem;
+      }
+      .footer-links-new a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.95rem;
+        position: relative;
+      }
+      .footer-links-new a::before {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 1px;
+        background: var(--orange-primary);
+        transition: width 0.3s ease;
+      }
+      .footer-links-new a:hover {
+        color: var(--orange-primary);
+        transform: translateX(6px);
+      }
+      .footer-links-new a:hover::before {
+        width: 12px;
+      }
+
+      .footer-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+      }
+      .footer-contact-item:hover {
+        color: var(--text-primary);
+      }
+      .footer-contact-item i {
+        color: var(--orange-primary);
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+      }
+
+      .social-icons-enhanced {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+      }
+      .social-icons-enhanced a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 119, 0, 0.08);
+        border-radius: 12px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        color: var(--text-muted);
+        text-decoration: none;
+        border: 1px solid rgba(255, 119, 0, 0.15);
+        font-size: 1.1rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .social-icons-enhanced a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: var(--orange-primary);
+        transition: height 0.3s ease;
+        z-index: 0;
+        border-radius: 12px;
+      }
+      .social-icons-enhanced a:hover::after {
+        height: 100%;
+      }
+      .social-icons-enhanced a:hover {
+        color: var(--dark-bg);
+        transform: translateY(-4px);
+        border-color: transparent;
+        box-shadow: 0 8px 25px rgba(255, 119, 0, 0.3);
+      }
+      .social-icons-enhanced a i {
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 119, 0, 0.3), transparent);
+        margin-bottom: 1.5rem;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 0;
+        padding-bottom: 1.5rem;
+        border-top: none;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      .copyright .heart {
+        color: var(--orange-primary);
+        display: inline-block;
+        animation: heartbeat 1.5s ease infinite;
+      }
+      @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        15% { transform: scale(1.3); }
+        30% { transform: scale(1); }
+        45% { transform: scale(1.2); }
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--orange-primary);
+        color: var(--dark-bg);
+        border: none;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 20px rgba(255, 119, 0, 0.4);
+      }
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(255, 119, 0, 0.6);
+      }
+
+      /* ===== NOTIFICATION SECTION ENHANCED ===== */
+      .notification-social-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .notification-social-btn.instagram {
+        background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+        color: #fff;
+      }
+      .notification-social-btn.linkedin {
+        background: #0077b5;
+        color: #fff;
+      }
+      .notification-social-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      }
+      .notification-social-btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+      }
+      .notification-social-btn:hover::after {
+        left: 100%;
+      }
+      .notification-social-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      /* ===== CONTACT CARD ENHANCED ===== */
+      .contact-item-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 1.5rem;
+        background: var(--dark-card);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 119, 0, 0.1);
+        margin-bottom: 1.2rem;
+        transition: all 0.3s ease;
+      }
+      .contact-item-card:hover {
+        border-color: var(--orange-primary);
+        transform: translateX(5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      .contact-item-card .contact-item-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(255, 119, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--orange-primary);
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .contact-item-card:hover .contact-item-icon {
+        background: var(--orange-primary);
+        color: var(--dark-bg);
+      }
+      .contact-item-card h4 {
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+      }
+      .contact-item-card p,
+      .contact-item-card a {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .contact-item-card a:hover {
+        color: var(--orange-primary);
+      }
+
       /* Animated Background */
       .background {
         position: fixed;
@@ -628,18 +1241,95 @@
 
       .team-card {
         background: var(--dark-surface);
-        padding: 2rem;
-        border-radius: 15px;
+        padding: 2.5rem 2rem 2rem;
+        border-radius: 20px;
         text-align: center;
         border: 1px solid var(--dark-border);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .team-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--orange-primary), var(--orange-secondary), var(--orange-light));
+        background-size: 200% 100%;
+        animation: gradientShift 3s ease infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .team-card:hover::before {
+        opacity: 1;
       }
 
       .team-card:hover {
         border-color: var(--orange-primary);
-        transform: translateY(-5px);
-        box-shadow: var(--orange-glow);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), var(--orange-glow);
+      }
+
+      .team-card .user-icon {
+        width: 90px;
+        height: 90px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+        background: rgba(255, 119, 0, 0.08);
+        border: 2px solid var(--dark-border);
+        border-radius: 50%;
+        color: var(--text-muted);
+        transition: all 0.4s ease;
+        padding: 0;
+      }
+
+      .team-card:hover .user-icon {
+        border-color: var(--orange-primary);
+        color: var(--orange-primary);
+        background: rgba(255, 119, 0, 0.15);
+        box-shadow: 0 0 25px rgba(255, 119, 0, 0.3);
+        transform: scale(1.1);
+      }
+
+      .team-card .team-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+      }
+
+      .team-card .team-role {
+        display: inline-block;
+        padding: 5px 14px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        background: rgba(255, 119, 0, 0.12);
+        color: var(--orange-primary);
+        border: 1px solid rgba(255, 119, 0, 0.2);
+        margin-bottom: 0.6rem;
+        letter-spacing: 0.5px;
+      }
+
+      .team-card .team-university {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+
+      .team-card .team-university i {
+        color: var(--orange-primary);
+        font-size: 0.75rem;
       }
 
       /* Services Page Styles */
@@ -719,74 +1409,7 @@
         color: var(--text-secondary);
       }
 
-      /* Footer */
-      footer {
-        background: rgba(15, 15, 15, 0.9);
-        color: var(--text-primary);
-        padding: 80px 0 30px;
-        border-top: 1px solid var(--dark-border);
-        position: relative;
-      }
-
-      .footer-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 3rem;
-        margin-bottom: 3rem;
-      }
-
-      .footer-links {
-        list-style: none;
-      }
-
-      .footer-links li {
-        margin-bottom: 0.8rem;
-      }
-
-      .footer-links a {
-        color: var(--text-secondary);
-        text-decoration: none;
-        transition: all 0.3s ease;
-      }
-
-      .footer-links a:hover {
-        color: var(--orange-primary);
-        padding-left: 5px;
-      }
-
-      .social-icons {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
-      }
-
-      .social-icons a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-        background: var(--dark-surface);
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        color: var(--text-secondary);
-        text-decoration: none;
-        border: 1px solid var(--dark-border);
-      }
-
-      .social-icons a:hover {
-        background: var(--orange-primary);
-        color: var(--dark-bg);
-        transform: translateY(-3px);
-        border-color: transparent;
-      }
-
-      .copyright {
-        text-align: center;
-        padding-top: 3rem;
-        border-top: 1px solid var(--dark-border);
-        color: var(--text-muted);
-      }
+      /* Footer styles moved to enhanced footer section above */
 
       /* Responsive */
       @media (max-width: 768px) {
@@ -819,10 +1442,41 @@
         .user-grid {
           grid-template-columns: 1fr;
         }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+        .footer-col h4::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .social-icons-enhanced {
+          justify-content: center;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .timeline {
+          padding-left: 50px;
+        }
+        .timeline-item::before {
+          left: -40px;
+          width: 28px;
+          height: 28px;
+          font-size: 0.75rem;
+        }
+        .notification-social-btns {
+          flex-direction: column;
+          align-items: center;
+        }
       }
     </style>
   </head>
   <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
     <!-- Animated Background -->
     <div class="background">
       <div class="bg-grid"></div>
@@ -885,9 +1539,9 @@
                 Join the Movement
               </a>
               <a
-                href="#features"
+                href="https://youtu.be/4GrbGINxi_I"
                 class="btn btn-secondary"
-                onclick="showPage('home')"
+                target="_blank"
               >
                 <i class="fas fa-play-circle"></i>
                 See How It Works
@@ -937,6 +1591,8 @@
           </div>
         </div>
       </section>
+
+
 
       <!-- User Types Section -->
       <section id="user-types" class="user-types">
@@ -1000,6 +1656,37 @@
         </div>
       </section>
 
+      <!-- How It Works Timeline -->
+      <section class="timeline-section">
+        <div class="container">
+          <h2 class="section-title scroll-element">
+            How It <span class="neon-text">Works</span>
+          </h2>
+          <div class="timeline">
+            <div class="timeline-item scroll-element delay-1" data-step="1">
+              <i class="fas fa-user-plus timeline-icon"></i>
+              <h3>Create Your Profile</h3>
+              <p>Sign up as a barber, client, or salon owner. Customize your profile with your specialties, portfolio, and preferences.</p>
+            </div>
+            <div class="timeline-item scroll-element delay-2" data-step="2">
+              <i class="fas fa-search timeline-icon"></i>
+              <h3>Discover & Connect</h3>
+              <p>Use our smart matching to find the perfect barber or attract clients who love your style. Browse reviews and portfolios.</p>
+            </div>
+            <div class="timeline-item scroll-element delay-3" data-step="3">
+              <i class="fas fa-calendar-check timeline-icon"></i>
+              <h3>Book & Manage</h3>
+              <p>Schedule appointments seamlessly, receive automated reminders, and manage your calendar all in one place.</p>
+            </div>
+            <div class="timeline-item scroll-element" data-step="4">
+              <i class="fas fa-trophy timeline-icon"></i>
+              <h3>Grow & Succeed</h3>
+              <p>Build your reputation with reviews, expand your client base, and take your career to the next level.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Notification Section -->
       <section id="notification" class="notification">
         <div class="container">
@@ -1007,49 +1694,28 @@
             <h2
               style="margin-bottom: 1rem; font-size: 2.5rem; text-align: center"
             >
-              Be the <span class="neon-text">First</span> to Know
+              We are Live <span class="neon-text">Now</span>
             </h2>
             <p
               style="
                 font-size: 1.2rem;
                 text-align: center;
                 color: var(--text-secondary);
+                margin-bottom: 2rem;
               "
             >
-              We're launching soon! Get notified when StyloQ goes live by following our Pages.
-            </p><br/><br/>
-            <ul class="footer-links" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
-              <li style="display: flex; align-items: center; gap: 8px;">
-                <i class="fab fa-instagram" style="color: var(--orange-primary);"></i>
-                <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" style="text-decoration: none; color: var(--text-secondary);"> Instagram</a>
-              </li>
-              <li style="display: flex; align-items: center; gap: 8px;">
-                <i class="fab fa-linkedin-in" style="color: var(--orange-primary);"></i>
-                <a href="https://www.linkedin.com/company/styloq/" style="text-decoration: none; color: var(--text-secondary);"> Linkedin</a>
-              </li>
-            </ul>
-
-            <!-- <div class="notification-form">
-              <select class="form-select" id="userType">
-                <option value="barber">I'm a Barber/Stylist</option>
-                <option value="client">I'm a Client</option>
-                <option value="salon">I'm a Salon Owner</option>
-              </select>
-              <input
-                type="email"
-                class="form-input"
-                id="emailInput"
-                placeholder="Enter your email address"
-              />
-              <button class="btn btn-primary" onclick="subscribe()">
-                <i class="fas fa-bell"></i>
-                Notify Me on Launch
-              </button>
-            </div> -->
-
-            <div class="success-message" id="successMessage">
-              🎉 Awesome! We'll notify you when we launch. Check your email for
-              confirmation.
+              Experience the future of barbering. Visit our live web application.
+            </p>
+            <div class="notification-social-btns" style="margin-top: 0;">
+              <a href="https://styloq-hq.vercel.app/" target="_blank" class="notification-social-btn" style="background: var(--orange-primary); color: var(--dark-bg);">
+                <i class="fas fa-external-link-alt"></i> Visit Web App
+              </a>
+              <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank" class="notification-social-btn instagram">
+                <i class="fab fa-instagram"></i> Follow on Instagram
+              </a>
+              <a href="https://www.linkedin.com/company/styloq/" target="_blank" class="notification-social-btn linkedin">
+                <i class="fab fa-linkedin-in"></i> Connect on LinkedIn
+              </a>
             </div>
           </div>
         </div>
@@ -1109,73 +1775,49 @@
               <div class="user-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h3>Nethul Trevor</h3>
-              <p style="color: var(--orange-primary); font-weight: 600; margin-top: 1rem;">
-                Project Lead & Backend Developer 
-              </p>
-              <p style="color: var(--text-secondary); margin-top: 0.5rem; " >
-                Second Year Computer science Student at IIT
-              </p>
+              <h3 class="team-name">Nethul Trevor</h3>
+              <span class="team-role">Project Lead & Backend Developer</span>
+              <p class="team-university"><i class="fas fa-graduation-cap"></i> 2nd Year CS Student at IIT</p>
+            </div>
+            <div class="team-card scroll-element delay-2">
+              <div class="user-icon">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <h3 class="team-name">Sandaru Perera</h3>
+              <span class="team-role">AI & Backend Developer</span>
+              <p class="team-university"><i class="fas fa-graduation-cap"></i> 2nd Year CS Student at IIT</p>
+            </div>
+            <div class="team-card scroll-element delay-3">
+              <div class="user-icon">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <h3 class="team-name">Hanzalah Misfath</h3>
+              <span class="team-role">Marketing & Backend Developer</span>
+              <p class="team-university"><i class="fas fa-graduation-cap"></i> 2nd Year CS Student at IIT</p>
             </div>
             <div class="team-card scroll-element delay-1">
               <div class="user-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h3>Sandaru Perera</h3>
-              <p style="color: var(--orange-primary); font-weight: 600; margin-top: 1rem;">
-                AI & Backend Developer 
-              </p>
-              <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-                Second Year Computer science Student at IIT
-              </p>
+              <h3 class="team-name">Disath Senuka</h3>
+              <span class="team-role">Database Admin & Backend Developer</span>
+              <p class="team-university"><i class="fas fa-graduation-cap"></i> 2nd Year CS Student at IIT</p>
             </div>
-            <div class="team-card scroll-element delay-1">
+            <div class="team-card scroll-element delay-2">
               <div class="user-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h3>Hanzalah Misfath</h3>
-              <p style="color: var(--orange-primary); font-weight: 600; margin-top: 1rem;">
-                Marketing & Backend Developer
-              </p>
-              <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-                Second Year Computer science Student at IIT
-              </p>
+              <h3 class="team-name">Chanuki Hettiarachchi</h3>
+              <span class="team-role">Front End Developer & Designer</span>
+              <p class="team-university"><i class="fas fa-graduation-cap"></i> 2nd Year CS Student at IIT</p>
             </div>
-            <div class="team-card scroll-element delay-1">
+            <div class="team-card scroll-element delay-3">
               <div class="user-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h3>Disath Senuka</h3>
-              <p style="color: var(--orange-primary); font-weight: 600; margin-top: 1rem;">
-                Database Admin & Backend Developer
-              </p>
-              <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-                Second Year Computer science Student at IIT
-              </p>
-            </div>
-            <div class="team-card scroll-element delay-1">
-              <div class="user-icon">
-                <i class="fas fa-user-tie"></i>
-              </div>
-              <h3>Chanuki Hettiarachchi</h3>
-              <p style="color: var(--orange-primary); font-weight: 600; margin-top: 1rem;">
-                Front End Developer and Designer
-              </p>
-              <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-                Second Year Computer science Student at IIT
-              </p>
-            </div>
-            <div class="team-card scroll-element delay-1">
-              <div class="user-icon">
-                <i class="fas fa-user-tie"></i>
-              </div>
-              <h3>Ranuthi Dahamsa</h3>
-              <p style="color: var(--orange-primary); font-weight: 600; margin-top: 1rem;">
-                Front End Developer and Designer
-              </p>
-              <p style="color: var(--text-secondary); margin-top: 0.5rem;">
-                Second Year Computer science Student at IIT
-              </p>
+              <h3 class="team-name">Ranuthi Dahamsa</h3>
+              <span class="team-role">Front End Developer & Designer</span>
+              <p class="team-university"><i class="fas fa-graduation-cap"></i> 2nd Year CS Student at IIT</p>
             </div>
           </div>
         </div>
@@ -1289,150 +1931,138 @@
 
       <section class="features">
         <div class="container">
-          <div class="contact-grid">
+          <div class="contact-grid" style="grid-template-columns: 1fr;">
             <div class="contact-info animate-slide-left delay-1">
-              <h3 style="margin-bottom: 2rem">Contact Information</h3>
-              <div style="margin-bottom: 2rem">
-                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                  <i class="fas fa-map-marker-alt"></i> Location
-                </h4>
-                <p style="color: var(--text-secondary)">
-                  Colombo,<br />Sri Lanka
-                </p>
+              <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Contact Information</h3>
+              
+              <div class="contact-item-card">
+                <div class="contact-item-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <h4>Location</h4>
+                  <p>Colombo, Sri Lanka</p>
+                </div>
               </div>
-              <div style="margin-bottom: 2rem">
-                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                  <i class="fas fa-phone"></i> Phone
-                </h4>
-                <p style="color: var(--text-secondary)">075 882 1476</p>
-                <p style="color: var(--text-secondary)">072 407 3473</p>
+
+              <div class="contact-item-card">
+                <div class="contact-item-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                  <h4>Phone</h4>
+                  <p>075 882 1476</p>
+                  <p>072 407 3473</p>
+                </div>
               </div>
-              <div>
-                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                  <i class="fas fa-envelope"></i> Email
-                </h4>
-                <p style="color: var(--text-secondary)">styloq99@gmail.com</p>
+
+              <div class="contact-item-card">
+                <div class="contact-item-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <h4>Email</h4>
+                  <p>styloq99@gmail.com</p>
+                </div>
               </div>
+
+              <div class="contact-item-card">
+                <div class="contact-item-icon">
+                  <i class="fab fa-instagram"></i>
+                </div>
+                <div>
+                  <h4>Instagram</h4>
+                  <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank">@styloq99</a>
+                </div>
+              </div>
+
+              <div class="contact-item-card">
+                <div class="contact-item-icon">
+                  <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div>
+                  <h4>LinkedIn</h4>
+                  <a href="https://www.linkedin.com/company/styloq/" target="_blank">@styloq</a>
+                </div>
+              </div>
+
             </div>
-            <div style="margin-bottom: 2rem">
-              <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                <i class="fab fa-instagram"></i> Instagram
-              </h4>
-              <p style="margin: 0;">
-                <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank" style="color: var(--text-secondary); text-decoration: none;">@styloq99</a>
-              </p>
-              <br/>
-              <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                <i class="fab fa-linkedin-in"></i> Linkedin
-              </h4>
-              <p style="margin: 0;">
-                <a href="https://www.linkedin.com/company/styloq/" target="_blank" style="color: var(--text-secondary); text-decoration: none;">@styloq99</a>
-              </p>
-              <br/>    
-            </div> 
-            <div style="margin-bottom: 2rem">
-            </div>            
-
-
-            <!-- <div class="contact-form animate-slide-right delay-2">
-              <h3 style="margin-bottom: 2rem">Send us a Message</h3>
-              <div class="form-group">
-                <label for="name">Full Name</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  id="contactName"
-                  placeholder="Your name"
-                />
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address</label>
-                <input
-                  type="email"
-                  class="form-input"
-                  id="contactEmail"
-                  placeholder="Your email"
-                />
-              </div>
-              <div class="form-group">
-                <label for="subject">Subject</label>
-                <input
-                  type="text"
-                  class="form-input"
-                  id="contactSubject"
-                  placeholder="Subject"
-                />
-              </div>
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea
-                  class="form-input"
-                  id="contactMessage"
-                  placeholder="Your message"
-                  rows="5"
-                  style="resize: vertical"
-                ></textarea>
-              </div>
-              <button
-                class="btn btn-primary"
-                style="width: 100%"
-                onclick="sendMessage()"
-              >
-                <i class="fas fa-paper-plane"></i> Send Message
-              </button>
-            </div> -->
           </div>
         </div>
       </section>
     </div>
 
+    <!-- Footer Wave Separator -->
+    <div class="footer-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <path fill="#0a0a0a" d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,40 1440,40 L1440,80 L0,80 Z"></path>
+      </svg>
+    </div>
+
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div class="footer-content">
-          <div class="animate-on-load">
-            <h3>StyloQ</h3><br></br>
-            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-              The digital bridge for the grooming industry. Revolutionizing how barbers, salons, and clients connect.
-            </p>
-            <div class="social-icons">
-              <a
-                href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw=="
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="https://www.linkedin.com/company/styloq/"><i class="fab fa-linkedin-in"></i></a>
+        <div class="footer-inner">
+          <div class="footer-content">
+            <div class="footer-brand scroll-element">
+              <h3>StyloQ</h3>
+              <p>The digital bridge for the grooming industry. Revolutionizing how barbers, salons, and clients connect across cities.</p>
+              <div class="social-icons-enhanced">
+                <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/styloq/" target="_blank" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="footer-col scroll-element delay-1">
+              <h4>Quick Links</h4>
+              <ul class="footer-links-new">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                <li><a href="#" onclick="showPage('services')">Services</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col scroll-element delay-2">
+              <h4>Follow Us</h4>
+              <ul class="footer-links-new">
+                <li><a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank"><i class="fab fa-instagram" style="margin-right:6px"></i>Instagram</a></li>
+                <li><a href="https://www.linkedin.com/company/styloq/" target="_blank"><i class="fab fa-linkedin-in" style="margin-right:6px"></i>LinkedIn</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col scroll-element delay-3">
+              <h4>Contact</h4>
+              <div class="footer-contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>styloq99@gmail.com</span>
+              </div>
+              <div class="footer-contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Colombo, Sri Lanka</span>
+              </div>
             </div>
           </div>
-          <div class="animate-on-load delay-1">
-            <h3>Quick Links</h3><br></br>
-            <ul class="footer-links">
-              <li><a href="#" onclick="showPage('home')">Home</a></li>
-              <li><a href="#" onclick="showPage('about')">About</a></li>
-              <li><a href="#" onclick="showPage('services')">Services</a></li>
-              <!-- <li><a href="#" onclick="showPage('contact')">Contact</a></li> -->
-            </ul>
+
+          <div class="footer-divider"></div>
+
+          <div class="copyright">
+            <p>&copy; 2026 StyloQ. All rights reserved.</p>
           </div>
-          <div class="animate-on-load delay-2">
-            <h3>Follow Us </h3><br></br>
-            <ul class="footer-links">
-              <li><i class="fab fa-instagram"></i><a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==">  Instagram</a></li>
-              <li><i class="fab fa-linkedin-in"></i><a href="https://www.linkedin.com/company/styloq/"> Linkedin</a></li>
-            </ul>
-          </div>
-          <div class="animate-on-load delay-3">
-            <h3>Contact</h3><br></br>
-            <ul class="footer-links">
-              <li><i class="fas fa-envelope"></i> styloq99@gmail.com</li>
-              <li><i class="fas fa-map-marker-alt"></i> Colombo, Srilanka</li>
-            </ul>
-          </div>
-        </div>
-        <div class="copyright">
-          <p>&copy; 2026 StyloQ. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
       /* ---------- Observer & Helper Setup ---------- */
       const observerOptions = {
@@ -1505,6 +2135,130 @@
             } else {
               el.classList.remove("visible");
             }
+          });
+        }
+
+        // --- CUSTOM CURSOR & HOVER EFFECTS ---
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        
+        if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
+          window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Smoother delay for outline using animate
+            cursorOutline.animate({
+              left: `${posX}px`,
+              top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+          });
+          
+          // Add hover effect to clickable elements
+          const clickables = document.querySelectorAll('a, button, .btn, .feature-card, .user-card, .team-card, .service-card, .logo, input, textarea, select');
+          clickables.forEach((el) => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+          });
+        }
+
+        // --- MOUSE PARALLAX EFFECT FOR BACKGROUND ---
+        const bgElements = document.querySelectorAll('.bg-element');
+        if (bgElements.length > 0 && window.matchMedia("(pointer: fine)").matches) {
+          window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            bgElements.forEach((el, index) => {
+              // Different movement speed based on index
+              const speed = (index + 1) * 20; 
+              const moveX = (x * speed) - (speed/2);
+              const moveY = (y * speed) - (speed/2);
+              
+              // We maintain the existing CSS animation on bg-element but add a positional offset
+              // For cleaner look in JS, we just use translate
+              el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+          });
+        }
+
+        // --- BUTTON RIPPLE EFFECT ---
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            // Ripple needs to be positioned relative to button
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const ripple = document.createElement('span');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        });
+
+        // --- VANILLA TILT INIT ---
+        if (typeof VanillaTilt !== 'undefined') {
+          VanillaTilt.init(document.querySelectorAll(".feature-card, .user-card, .team-card, .service-card, .stat-card, .timeline-item"), {
+            max: 5,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+            gyroscope: true
+          });
+        }
+
+        // --- ANIMATED COUNTER ---
+        const counterObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseInt(el.getAttribute('data-target'));
+              const duration = 2000; // ms
+              const start = performance.now();
+              
+              function updateCounter(currentTime) {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // easeOutQuart for a nice deceleration
+                const eased = 1 - Math.pow(1 - progress, 4);
+                el.textContent = Math.floor(eased * target) + '+';
+                if (progress < 1) {
+                  requestAnimationFrame(updateCounter);
+                }
+              }
+              requestAnimationFrame(updateCounter);
+              counterObserver.unobserve(el); // only animate once
+            }
+          });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+          counterObserver.observe(el);
+        });
+
+        // --- BACK TO TOP BUTTON ---
+        const backToTop = document.getElementById('backToTop');
+        if (backToTop) {
+          window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+              backToTop.classList.add('visible');
+            } else {
+              backToTop.classList.remove('visible');
+            }
+          });
+          backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           });
         }
 
