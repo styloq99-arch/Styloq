@@ -52,6 +52,77 @@
         position: relative;
       }
 
+      /* Custom Cursor */
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--orange-primary);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+        box-shadow: 0 0 10px rgba(255, 119, 0, 0.8);
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
+        display: none;
+      }
+
+      .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(255, 119, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9998;
+        pointer-events: none;
+        transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+        display: none;
+      }
+
+      @media (pointer: fine) {
+        body, a, button, .btn, .feature-card, .user-card, .team-card, .service-card, .logo, .social-icons a, select, input, textarea {
+          cursor: none;
+        }
+        .cursor-dot, .cursor-outline {
+          display: block;
+        }
+      }
+
+      .cursor-hover .cursor-outline {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(255, 119, 0, 0.1);
+        border-color: var(--orange-primary);
+        backdrop-filter: blur(2px);
+      }
+      
+      .cursor-hover .cursor-dot {
+        width: 12px;
+        height: 12px;
+      }
+
+      /* Button Ripple Effect */
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        background-color: rgba(255, 255, 255, 0.3);
+        pointer-events: none;
+      }
+
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
       /* Animated Background */
       .background {
         position: fixed;
@@ -823,6 +894,9 @@
     </style>
   </head>
   <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
     <!-- Animated Background -->
     <div class="background">
       <div class="bg-grid"></div>
@@ -1308,28 +1382,29 @@
                 <p style="color: var(--text-secondary)">072 407 3473</p>
               </div>
               <div>
-                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
+                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem;">
                   <i class="fas fa-envelope"></i> Email
                 </h4>
                 <p style="color: var(--text-secondary)">styloq99@gmail.com</p>
               </div>
+              <div style="margin-bottom: 2rem; margin-top: 2rem;">
+                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
+                  <i class="fab fa-instagram"></i> Instagram
+                </h4>
+                <p style="margin: 0;">
+                  <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank" style="color: var(--text-secondary); text-decoration: none;">@styloq99</a>
+                </p>
+                <br/>
+                <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem; margin-top: 16rem;">
+                  <i class="fab fa-linkedin-in"></i> Linkedin
+                </h4>
+                <p style="margin: 0;">
+                  <a href="https://www.linkedin.com/company/styloq/" target="_blank" style="color: var(--text-secondary); text-decoration: none;">@styloq</a>
+                </p>
+                <br/>    
+              </div>              
             </div>
-            <div style="margin-bottom: 2rem">
-              <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                <i class="fab fa-instagram"></i> Instagram
-              </h4>
-              <p style="margin: 0;">
-                <a href="https://www.instagram.com/styloq99?igsh=MTA2djNoZ2FwMHZybw==" target="_blank" style="color: var(--text-secondary); text-decoration: none;">@styloq99</a>
-              </p>
-              <br/>
-              <h4 style="color: var(--orange-primary); margin-bottom: 0.5rem">
-                <i class="fab fa-linkedin-in"></i> Linkedin
-              </h4>
-              <p style="margin: 0;">
-                <a href="https://www.linkedin.com/company/styloq/" target="_blank" style="color: var(--text-secondary); text-decoration: none;">@styloq99</a>
-              </p>
-              <br/>    
-            </div> 
+ 
             <div style="margin-bottom: 2rem">
             </div>            
 
@@ -1433,6 +1508,7 @@
       </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <script>
       /* ---------- Observer & Helper Setup ---------- */
       const observerOptions = {
@@ -1505,6 +1581,86 @@
             } else {
               el.classList.remove("visible");
             }
+          });
+        }
+
+        // --- CUSTOM CURSOR & HOVER EFFECTS ---
+        const cursorDot = document.querySelector('[data-cursor-dot]');
+        const cursorOutline = document.querySelector('[data-cursor-outline]');
+        
+        if (cursorDot && cursorOutline && window.matchMedia("(pointer: fine)").matches) {
+          window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            
+            // Smoother delay for outline using animate
+            cursorOutline.animate({
+              left: `${posX}px`,
+              top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+          });
+          
+          // Add hover effect to clickable elements
+          const clickables = document.querySelectorAll('a, button, .btn, .feature-card, .user-card, .team-card, .service-card, .logo, input, textarea, select');
+          clickables.forEach((el) => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+          });
+        }
+
+        // --- MOUSE PARALLAX EFFECT FOR BACKGROUND ---
+        const bgElements = document.querySelectorAll('.bg-element');
+        if (bgElements.length > 0 && window.matchMedia("(pointer: fine)").matches) {
+          window.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            bgElements.forEach((el, index) => {
+              // Different movement speed based on index
+              const speed = (index + 1) * 20; 
+              const moveX = (x * speed) - (speed/2);
+              const moveY = (y * speed) - (speed/2);
+              
+              // We maintain the existing CSS animation on bg-element but add a positional offset
+              // For cleaner look in JS, we just use translate
+              el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+          });
+        }
+
+        // --- BUTTON RIPPLE EFFECT ---
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            // Ripple needs to be positioned relative to button
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const ripple = document.createElement('span');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        });
+
+        // --- VANILLA TILT INIT ---
+        if (typeof VanillaTilt !== 'undefined') {
+          VanillaTilt.init(document.querySelectorAll(".feature-card, .user-card, .team-card, .service-card"), {
+            max: 5,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+            gyroscope: true
           });
         }
 
